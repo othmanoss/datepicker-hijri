@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>
+		body{
+			font-family: "Trebuchet MS", sans-serif;
+			margin: 50px;
+		}
+		.ui-datepicker td span,
+		.ui-datepicker td a {
+		  padding-bottom: 1em;
+		}
+
+		.ui-datepicker-title[data-custom] {
+		  position: relative;
+		  padding-bottom: 10px;
+		}
+		.ui-datepicker-title[data-custom]::after {
+		  color: green;
+		  content: attr(data-custom);
+		  display: block;
+		  font-size: small;
+		}
+
+		.ui-datepicker td[title]::after {
+		  content: attr(title);
+		  display: block;
+		  position: relative;
+		  color: green;
+		  font-size: .8em;
+		  height: 1.25em;
+		  margin-top: -1.25em;
+		  text-align: right;
+		  padding-right: .25em;
+		}
+	</style>
+</head>
+<body>
+
+<h1>Welcome to jQuery UI!</h1>
+
+<!-- Datepicker -->
+<h2 class="demoHeaders">Datepicker hijri</h2>
+<div id="datepicker"></div>
+
+<script src="external/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script src="hijricalendar.js"></script>
+<script>
+	$("#datepicker").datepicker({
+		beforeShow: addhijridate,
+		onChangeMonthYear: addhijridate,
+		beforeShowDay: function(date) {
+			var title = "" + getwriteIslamicDate(0,date,"day")
+			return [true, "", title];
+		}
+	});
+	addhijridate();
+</script>
+</body>
+</html>
